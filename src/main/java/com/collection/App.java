@@ -2,11 +2,14 @@ package com.collection;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.Queue;
 import java.util.Set;
 
@@ -65,5 +68,32 @@ public class App
             System.out.println(employee.getEmployeeCode() + " - " + employee.getEmployeeName() + " - " + employee.getEmployeeSalary());
         }
 
+        System.out.println();
+
+
+
+
+        System.out.println("Active Query");
+        List<Employee> employees = listEmployee.stream().filter(employe -> employe.getEmployeeSalary() >= 200000).sorted(Comparator.comparingDouble(Employee::getEmployeeSalary).reversed()).toList();
+
+        employees.forEach((employe -> System.out.println(employe.getEmployeeName() + ": "+ employe.getEmployeeSalary())));
+
+        System.out.println();
+
+
+        // cari employe
+        try{
+            Employee employee = findEmployee(listEmployee, "KR001").orElseThrow(()-> new NoSuchElementException("Data Tidak ditemukan"));
+
+            System.out.println("Active Query");
+            System.out.println(employee.getEmployeeName() + ": " + employee.getEmployeeSalary());
+        } catch(NoSuchElementException e){
+            System.out.println("Error: "+ e.getMessage());
+        }
+
+    }
+
+    static Optional<Employee> findEmployee (List<Employee> listEmployee, String number){
+        return listEmployee.stream().filter(employee -> employee.getEmployeeCode().equals(number)).findFirst();
     }
 }
