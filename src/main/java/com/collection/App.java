@@ -76,7 +76,7 @@ public class App
         System.out.println("Active Query");
         List<Employee> employees = listEmployee.stream().filter(employe -> employe.getEmployeeSalary() >= 200000).sorted(Comparator.comparingDouble(Employee::getEmployeeSalary).reversed()).toList();
 
-        employees.forEach((employe -> System.out.println(employe.getEmployeeName() + ": "+ employe.getEmployeeSalary())));
+        employees.forEach((employe -> System.out.println(employe.getEmployeeName() + ": Rp."+ employe.getEmployeeSalary())));
 
         System.out.println();
 
