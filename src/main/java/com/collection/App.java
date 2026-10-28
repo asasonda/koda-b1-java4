@@ -86,7 +86,8 @@ public class App
             Employee employee = findEmployee(listEmployee, "KR001").orElseThrow(()-> new NoSuchElementException("Data Tidak ditemukan"));
 
             System.out.println("Active Query");
-            System.out.println(employee.getEmployeeName() + ": " + employee.getEmployeeSalary());
+            System.out.println(employee.getEmployeeName());
+            System.out.println();
         } catch(NoSuchElementException e){
             System.out.println("Error: "+ e.getMessage());
         }
